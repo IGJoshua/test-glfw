@@ -11,7 +11,7 @@ CFLAGS = -I$(IDIR)
 
 LIBS =
 
-_DEPS = maths.h
+_DEPS = defines.h window.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
 _OBJ = main.o
@@ -22,3 +22,10 @@ $(OBJDIR)/%.o : $(SRCDIR)/%.c $(DEPS)
 
 build : $(OBJ)
 	$(CC) -o $(BUILDDIR)/$(PROJ) $^ $(CFLAGS) $(LIBS)
+
+.PHONY: clean
+
+clean:
+	rm -r $(BUILDDIR)
+	mkdir $(BUILDDIR)
+	mkdir $(OBJDIR)
