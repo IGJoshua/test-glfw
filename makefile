@@ -1,27 +1,28 @@
-PROJ = simple_ray_tracer
+PROJ = simple_cone_tracer
 
 IDIR = include
 SRCDIR = src
 OBJDIR = build/obj
 BUILDDIR = build
-LDIR = lib
+LIBDIR = -Llib
 
 CC = clang
-CFLAGS = -I$(IDIR)
+CFLAGS = $(foreach DIR,$(IDIR),-I$(DIR))
 
-LIBS =
+_LIBS = glfw GL
+LIBS = $(foreach LIB,$(_LIBS),-l$(LIB))
 
 _DEPS = defines.h window.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = main.o
+_OBJ = main.o window.o
 OBJ = $(patsubst %,$(OBJDIR)/%,$(_OBJ))
 
 $(OBJDIR)/%.o : $(SRCDIR)/%.c $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS)
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 build : $(OBJ)
-	$(CC) -o $(BUILDDIR)/$(PROJ) $^ $(CFLAGS) $(LIBS)
+	$(CC) $(CFLAGS) $(LIBS) -o $(BUILDDIR)/$(PROJ) $^ $(LIBDIR)
 
 .PHONY: clean
 
@@ -29,3 +30,25 @@ clean:
 	rm -r $(BUILDDIR)
 	mkdir $(BUILDDIR)
 	mkdir $(OBJDIR)
+
+.PHONY: run
+
+run : build
+	./build/$(PROJ)
+
+.PHONY: rebuild
+
+rebuild : clean build
+
+WINCC = x86_64-w64-mingw32-clang
+_WINLIBS = glfw3 freeglut opengl32
+WINLIBS = $(foreach LIB,$(_WINLIBS),-l$(LIB))
+
+_WINOBJ = $(foreach O,$(_OBJ),$(O)bj)
+WINOBJ = $(patsubst %,$(OBJDIR)/%,$(_WINOBJ))
+
+$(OBJDIR)/%.obj : $(SRCDIR)/%.c $(DEPS)
+	$(WINCC) $(CFLAGS) -c -o $@ $<
+
+windows : $(WINOBJ)
+	$(WINCC) -v $(CFLAGS) $(LIBDIR) -o $(BUILDDIR)/$(PROJ).exe $^ $(WINLIBS)

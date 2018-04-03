@@ -1,5 +1,5 @@
 #!/bin/bash
 
-PROJECT=simple_ray_tracer
+PROJECT=simple_cone_tracer
 
 ./build/$PROJECT
