@@ -1,6 +1,6 @@
 ((nil . ((c-c++-default-mode-for-headers . c-mode)
          (c-c++-enable-clang-support . t)
-         (company-c-headers-path-user . ("." "/home/jsuskalo/Programming/Projects/C/test_cone_tracer/include"))
-         (flycheck-clang-include-path . ("." "/home/jsuskalo/Programming/Projects/C/test_cone_tracer/include"))
+         (company-c-headers-path-user . ("." "/home/jsuskalo/Programming/Projects/C/test_cone_tracer/include" "C:/Programming/Projects/C/test-glfw/include"))
+         (flycheck-clang-include-path . ("." "/home/jsuskalo/Programming/Projects/C/test_cone_tracer/include" "C:/Programming/Projects/C/test-glfw/include"))
          (projectile-project-compilation-dir . "./")))
  (c-mode . ((indent-tabs-mode . t))))
