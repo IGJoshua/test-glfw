@@ -27,9 +27,8 @@ build : $(OBJ)
 .PHONY: clean
 
 clean:
-	rm -r $(BUILDDIR)
-	mkdir $(BUILDDIR)
-	mkdir $(OBJDIR)
+	rm $(OBJDIR)/*
+	rm $(BUILDDIR)/$(PROJ)*
 
 .PHONY: run
 
