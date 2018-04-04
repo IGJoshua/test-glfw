@@ -41,7 +41,7 @@ run : build
 rebuild : clean build
 
 WINCC = x86_64-w64-mingw32-clang
-_WINLIBS = glfw3 freeglut opengl32
+_WINLIBS = glfw3dll opengl32
 WINLIBS = $(foreach LIB,$(_WINLIBS),-l$(LIB))
 
 _WINOBJ = $(foreach O,$(_OBJ),$(O)bj)
@@ -51,4 +51,4 @@ $(OBJDIR)/%.obj : $(SRCDIR)/%.c $(DEPS)
 	$(WINCC) $(CFLAGS) -c -o $@ $<
 
 windows : $(WINOBJ)
-	$(WINCC) -v $(CFLAGS) $(LIBDIR) -o $(BUILDDIR)/$(PROJ).exe $^ $(WINLIBS)
+	$(WINCC) -DGLFW_DLL $(CFLAGS) $(LIBDIR) -o $(BUILDDIR)/$(PROJ).exe $^ $(WINLIBS)
