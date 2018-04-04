@@ -49,5 +49,12 @@ WINOBJ = $(patsubst %,$(OBJDIR)/%,$(_WINOBJ))
 $(OBJDIR)/%.obj : $(SRCDIR)/%.c $(DEPS)
 	$(WINCC) $(CFLAGS) -c -o $@ $<
 
+.PHONY: windows
+
 windows : $(WINOBJ)
 	$(WINCC) -DGLFW_DLL $(CFLAGS) $(LIBDIR) -o $(BUILDDIR)/$(PROJ).exe $^ $(WINLIBS)
+
+.PHONY: wine
+
+wine : windows
+	cd build && wine $(PROJ).exe
