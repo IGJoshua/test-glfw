@@ -1,5 +1,0 @@
-#!/bin/bash
-
-PROJECT=simple_cone_tracer
-
-./build/$PROJECT
