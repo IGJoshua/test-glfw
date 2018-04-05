@@ -1,2 +1,8 @@
+# Ignores for OpenGL project
+
+# Binary files
 build/
 lib/
+
+# Editor specific
+.dir-locals.el

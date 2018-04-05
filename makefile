@@ -33,7 +33,7 @@ clean:
 .PHONY: run
 
 run : build
-	./build/$(PROJ)
+	$(BUILDDIR)/$(PROJ)
 
 .PHONY: rebuild
 
@@ -57,4 +57,4 @@ windows : $(WINOBJ)
 .PHONY: wine
 
 wine : windows
-	cd build && wine $(PROJ).exe
+	wine $(BUILDDIR)/$(PROJ).exe
