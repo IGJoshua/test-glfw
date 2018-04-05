@@ -27,7 +27,15 @@ void keyCallback(
 
 //static double delta = 1.0/60.0;
 
+#ifdef _WIN32
+int WINAPI WinMain(
+		HINSTANCE hInstance,
+		HINSTANCE hPrevInstance,
+		LPSTR lpCmdLine,
+		int nCmdShow)
+#else
 int main()
+#endif
 {
 		GLFWwindow *window = initWindow(640, 480, "Hello, world!");
 
